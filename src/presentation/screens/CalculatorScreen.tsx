@@ -13,33 +13,72 @@ const CalculatorScreen = () => {
       </View>
       {/* Buttons */}
       <View style={globalStyles.row}>
-        <CalculatorButton darkText label="C" color={colors.lightGray} />
-        <CalculatorButton darkText label="+/-" color={colors.lightGray} />
-        <CalculatorButton darkText label="del" color={colors.lightGray} />
-        <CalculatorButton label="÷" color={colors.orange} />
+        <CalculatorButton
+          onPress={() => console.log('C')}
+          label="C"
+          darkText
+          color={colors.lightGray}
+        />
+        <CalculatorButton
+          onPress={() => console.log('+/-')}
+          label="+/-"
+          darkText
+          color={colors.lightGray}
+        />
+        <CalculatorButton
+          onPress={() => console.log('del')}
+          label="del"
+          darkText
+          color={colors.lightGray}
+        />
+        <CalculatorButton
+          onPress={() => console.log('÷')}
+          label="÷"
+          color={colors.orange}
+        />
       </View>
       <View style={globalStyles.row}>
-        <CalculatorButton label="7" />
-        <CalculatorButton label="8" />
-        <CalculatorButton label="9" />
-        <CalculatorButton label="×" color={colors.orange} />
+        <CalculatorButton onPress={() => console.log('7')} label="7" />
+        <CalculatorButton onPress={() => console.log('8')} label="8" />
+        <CalculatorButton onPress={() => console.log('9')} label="9" />
+        <CalculatorButton
+          onPress={() => console.log('×')}
+          label="×"
+          color={colors.orange}
+        />
       </View>
       <View style={globalStyles.row}>
-        <CalculatorButton label="4" />
-        <CalculatorButton label="5" />
-        <CalculatorButton label="6" />
-        <CalculatorButton label="-" color={colors.orange} />
+        <CalculatorButton onPress={() => console.log('4')} label="4" />
+        <CalculatorButton onPress={() => console.log('5')} label="5" />
+        <CalculatorButton onPress={() => console.log('6')} label="6" />
+        <CalculatorButton
+          onPress={() => console.log('-')}
+          label="-"
+          color={colors.orange}
+        />
       </View>
       <View style={globalStyles.row}>
-        <CalculatorButton label="1" />
-        <CalculatorButton label="2" />
-        <CalculatorButton label="3" />
-        <CalculatorButton label="+" color={colors.orange} />
+        <CalculatorButton onPress={() => console.log('1')} label="1" />
+        <CalculatorButton onPress={() => console.log('2')} label="2" />
+        <CalculatorButton onPress={() => console.log('3')} label="3" />
+        <CalculatorButton
+          onPress={() => console.log('+')}
+          label="+"
+          color={colors.orange}
+        />
       </View>
       <View style={globalStyles.row}>
-        <CalculatorButton label="0" duobleSize />
-        <CalculatorButton label="." />
-        <CalculatorButton label="=" color={colors.orange} />
+        <CalculatorButton
+          onPress={() => console.log('0')}
+          label="0"
+          duobleSize
+        />
+        <CalculatorButton onPress={() => console.log('.')} label="." />
+        <CalculatorButton
+          onPress={() => console.log('=')}
+          label="="
+          color={colors.orange}
+        />
       </View>
     </View>
   );
