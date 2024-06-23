@@ -7,6 +7,7 @@ export const colors = {
   textPrimary: 'white',
   textSecondary: '#666666',
   background: '#000000',
+  darkText: '#000000',
 };
 
 export const globalStyles = StyleSheet.create({
@@ -48,7 +49,7 @@ export const globalStyles = StyleSheet.create({
     textAlign: 'center',
     padding: 10,
     fontSize: 30,
-    fontWeight: '300',
+    fontWeight: '400',
     color: colors.textPrimary,
   },
   row: {
@@ -56,5 +57,12 @@ export const globalStyles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 18,
     paddingHorizontal: 10,
+  },
+  largeButton: {
+    textAlign: 'left',
+    marginLeft: 20,
+  },
+  darkText: {
+    color: colors.darkText,
   },
 });
