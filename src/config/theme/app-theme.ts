@@ -19,6 +19,10 @@ export const globalStyles = StyleSheet.create({
     justifyContent: 'flex-end',
     padding: 20,
   },
+  displayData: {
+    paddingHorizontal: 30,
+    paddingBottom: 20,
+  },
   mainResult: {
     fontSize: 70,
     color: colors.textPrimary,
@@ -26,11 +30,31 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 10,
     fontWeight: '400',
   },
-
   subResult: {
     color: colors.textSecondary,
     fontSize: 40,
     textAlign: 'right',
     fontWeight: '300',
+  },
+  button: {
+    height: 80,
+    width: 80,
+    backgroundColor: colors.darkGray,
+    marginHorizontal: 10,
+    borderRadius: 100,
+    justifyContent: 'center',
+  },
+  buttonText: {
+    textAlign: 'center',
+    padding: 10,
+    fontSize: 30,
+    fontWeight: '300',
+    color: colors.textPrimary,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 18,
+    paddingHorizontal: 10,
   },
 });
