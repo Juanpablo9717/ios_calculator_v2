@@ -1,8 +1,18 @@
 /* eslint-disable curly */
-import {useState} from 'react';
+import {useRef, useState} from 'react';
+
+enum Operator {
+  add,
+  subtract,
+  multiply,
+  divide,
+}
 
 export const useCalculator = () => {
   const [currentNumber, setCurrentNumber] = useState('0');
+  const [prevNumber, setPrevNumber] = useState('0');
+
+  const lasOperation = useRef<Operator>();
 
   const buildNumber = (newNumber: string) => {
     if (currentNumber.includes('.') && newNumber === '.') return;
@@ -32,8 +42,9 @@ export const useCalculator = () => {
     setCurrentNumber(currentNumber + newNumber);
   };
 
-  const clear = () => {
+  const clean = () => {
     setCurrentNumber('0');
+    setPrevNumber('0');
   };
 
   const deleteOperation = () => {
@@ -59,14 +70,48 @@ export const useCalculator = () => {
     setCurrentNumber('-' + currentNumber);
   };
 
+  const setLastNumber = () => {
+    if (currentNumber.endsWith('.')) {
+      setPrevNumber(currentNumber.slice(0, -1));
+    } else {
+      setPrevNumber(currentNumber);
+    }
+    setCurrentNumber('0');
+  };
+
+  const divideOperation = () => {
+    setLastNumber();
+    lasOperation.current = Operator.divide;
+  };
+
+  const subtractOperation = () => {
+    setLastNumber();
+    lasOperation.current = Operator.subtract;
+  };
+
+  const addOperation = () => {
+    setLastNumber();
+    lasOperation.current = Operator.add;
+  };
+
+  const multiplyOperation = () => {
+    setLastNumber();
+    lasOperation.current = Operator.multiply;
+  };
+
   return {
     // Properties
     currentNumber,
+    prevNumber,
 
     // Methods
-    clear,
+    clean,
     toggleSign,
     buildNumber,
     deleteOperation,
+    divideOperation,
+    subtractOperation,
+    addOperation,
+    multiplyOperation,
   };
 };
