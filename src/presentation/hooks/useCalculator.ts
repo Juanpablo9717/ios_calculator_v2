@@ -32,5 +32,41 @@ export const useCalculator = () => {
     setCurrentNumber(currentNumber + newNumber);
   };
 
-  return {currentNumber, buildNumber};
+  const clear = () => {
+    setCurrentNumber('0');
+  };
+
+  const deleteOperation = () => {
+    if (currentNumber === '0') return;
+
+    if (currentNumber.includes('-') && currentNumber.length === 2) {
+      return setCurrentNumber('0');
+    }
+
+    if (currentNumber.length > 1) {
+      return setCurrentNumber(
+        currentNumber.substring(0, currentNumber.length - 1),
+      );
+    }
+    setCurrentNumber('0');
+  };
+
+  const toggleSign = () => {
+    if (currentNumber.includes('-')) {
+      return setCurrentNumber(currentNumber.replace('-', ''));
+    }
+
+    setCurrentNumber('-' + currentNumber);
+  };
+
+  return {
+    // Properties
+    currentNumber,
+
+    // Methods
+    clear,
+    toggleSign,
+    buildNumber,
+    deleteOperation,
+  };
 };
