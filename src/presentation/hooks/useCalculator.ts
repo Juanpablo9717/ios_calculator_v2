@@ -99,6 +99,31 @@ export const useCalculator = () => {
     lasOperation.current = Operator.multiply;
   };
 
+  const calculateResult = () => {
+    const num1 = Number(currentNumber);
+    const num2 = Number(prevNumber);
+
+    switch (lasOperation.current) {
+      case Operator.add:
+        setCurrentNumber(`${num1 + num2}`);
+        break;
+      case Operator.divide:
+        setCurrentNumber(`${num2 / num1}`);
+        break;
+      case Operator.multiply:
+        setCurrentNumber(`${num1 * num2}`);
+        break;
+      case Operator.subtract:
+        setCurrentNumber(`${num2 - num1}`);
+        break;
+
+      default:
+        throw new Error('Operation not implemented');
+    }
+
+    setPrevNumber('0');
+  };
+
   return {
     // Properties
     currentNumber,
@@ -108,10 +133,11 @@ export const useCalculator = () => {
     clean,
     toggleSign,
     buildNumber,
+    addOperation,
+    calculateResult,
     deleteOperation,
     divideOperation,
     subtractOperation,
-    addOperation,
     multiplyOperation,
   };
 };
