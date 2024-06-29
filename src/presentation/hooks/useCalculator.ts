@@ -1,14 +1,15 @@
 /* eslint-disable curly */
-import {useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 
 enum Operator {
-  add,
-  subtract,
-  multiply,
-  divide,
+  add = '+',
+  subtract = '-',
+  multiply = '×',
+  divide = '÷',
 }
 
 export const useCalculator = () => {
+  const [formula, setFormula] = useState('');
   const [currentNumber, setCurrentNumber] = useState('0');
   const [prevNumber, setPrevNumber] = useState('0');
 
@@ -45,6 +46,8 @@ export const useCalculator = () => {
   const clean = () => {
     setCurrentNumber('0');
     setPrevNumber('0');
+    setFormula('');
+    lasOperation.current = undefined;
   };
 
   const deleteOperation = () => {
@@ -100,34 +103,52 @@ export const useCalculator = () => {
   };
 
   const calculateResult = () => {
-    const num1 = Number(currentNumber);
-    const num2 = Number(prevNumber);
+    const result = calculateSubResult();
 
-    switch (lasOperation.current) {
+    lasOperation.current = undefined;
+    setFormula(`${result}`);
+    setPrevNumber('0');
+  };
+
+  const calculateSubResult = (): number => {
+    const [firstValue, operation, secondValue] = formula.split(' ');
+
+    const num1 = Number(firstValue);
+    const num2 = Number(secondValue);
+
+    if (isNaN(num2)) return num1;
+
+    switch (operation) {
       case Operator.add:
-        setCurrentNumber(`${num1 + num2}`);
-        break;
+        return num1 + num2;
       case Operator.divide:
-        setCurrentNumber(`${num2 / num1}`);
-        break;
+        return num1 / num2;
       case Operator.multiply:
-        setCurrentNumber(`${num1 * num2}`);
-        break;
+        return num1 * num2;
       case Operator.subtract:
-        setCurrentNumber(`${num2 - num1}`);
-        break;
-
+        return num1 - num2;
       default:
         throw new Error('Operation not implemented');
     }
-
-    setPrevNumber('0');
   };
+
+  useEffect(() => {
+    if (lasOperation.current) {
+      const firstFormulaPart = formula.split(' ').at(0);
+      setFormula(
+        `${firstFormulaPart} ${lasOperation.current} ${currentNumber}`,
+      );
+    } else {
+      setFormula(currentNumber);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentNumber]);
 
   return {
     // Properties
     currentNumber,
     prevNumber,
+    formula,
 
     // Methods
     clean,
